@@ -9,7 +9,6 @@ resolvers ++= Seq(
   "mandubian maven bintray" at "http://dl.bintray.com/mandubian/maven")
 
 libraryDependencies ++= Seq(
-  jdbc ,
   cache ,
   ws   ,
   specs2 % Test,
@@ -18,6 +17,8 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.1.1-2",
   "org.webjars" % "requirejs" % "2.1.8",
   "org.webjars" % "react" % "0.13.3",
+  "org.webjars" % "marked" % "0.3.2",
+  "org.webjars" % "jquery" % "2.1.4",
   //Apache Thrift, Scrooge, Finagle
   "org.apache.thrift" % "libthrift" % "0.9.2",
   "com.twitter" %% "finagle-http" % "6.24.0",
@@ -42,3 +43,7 @@ lazy val thrift = (project in file("thrift")).settings(
       base => base
     }
   )
+
+// Play provides two styles of routers, one expects its actions to be injected, the
+// other, legacy style, accesses its actions statically.
+routesGenerator := InjectedRoutesGenerator
