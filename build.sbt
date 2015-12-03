@@ -2,8 +2,6 @@ name := "PlayThriftBoilterplate"
 
 version := "1.0"
 
-lazy val `playthriftboilterplate` = (project in file(".")).enablePlugins(PlayScala)
-
 scalaVersion := "2.11.7"
 
 resolvers ++= Seq(
@@ -15,6 +13,11 @@ libraryDependencies ++= Seq(
   cache ,
   ws   ,
   specs2 % Test,
+  //WebJars
+  "org.webjars" %% "webjars-play" % "2.4.0-1",
+  "org.webjars" % "bootstrap" % "3.1.1-2",
+  "org.webjars" % "requirejs" % "2.1.8",
+  "org.webjars" % "react" % "0.13.3",
   //Apache Thrift, Scrooge, Finagle
   "org.apache.thrift" % "libthrift" % "0.9.2",
   "com.twitter" %% "finagle-http" % "6.24.0",
@@ -30,8 +33,10 @@ javaOptions ++= Seq("-Xms512M", "-Xmx2048M", "-XX:MaxPermSize=2048M", "-XX:+CMSC
 // enable higherKinds to remove warnings from scrooge-generated code that higher-kinded type should be enabled
 scalacOptions ++= Seq("-feature", "-language:reflectiveCalls", "-language:higherKinds")
 
-lazy val thrift = (project.in(file("thrift")))
-  .settings(
+
+lazy val root = (project in file(".")).enablePlugins(PlayScala,SbtWeb)
+
+lazy val thrift = (project in file("thrift")).settings(
     scroogeThriftSourceFolder in Compile <<= baseDirectory,
     scroogeThriftOutputFolder in Compile <<= baseDirectory {
       base => base
