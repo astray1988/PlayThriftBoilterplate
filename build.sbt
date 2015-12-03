@@ -1,3 +1,5 @@
+import sbt.Keys._
+
 name := "PlayThriftBoilterplate"
 
 version := "1.0"
@@ -37,12 +39,15 @@ scalacOptions ++= Seq("-feature", "-language:reflectiveCalls", "-language:higher
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala,SbtWeb)
 
-lazy val thrift = (project in file("thrift")).settings(
-    scroogeThriftSourceFolder in Compile <<= baseDirectory,
-    scroogeThriftOutputFolder in Compile <<= baseDirectory {
-      base => base
-    }
-  )
+scroogeThriftSourceFolder in Compile <<=  baseDirectory {
+  base =>  base / "thrift"
+}
+
+watchSources <++= baseDirectory map { path => ((path / "thrift") ** "*.thrift").get }
+
+scroogeThriftOutputFolder in Compile <<= sourceManaged {
+  source => source / "thrift_src_managed"
+}
 
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.
