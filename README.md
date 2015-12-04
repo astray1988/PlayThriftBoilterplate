@@ -1,4 +1,4 @@
-## PlayThriftStarterTemplate
+## PlayThriftBoilterplate
 This is a Scala Playframework starter template integrated with Apache Thrift and ReactJS library. The environment is built on top of JDK 1.8, Scala 2.11, Play 2.4.4, Apache Thrift 0.9.2, ReactJS 0.13.3
 
 ## Interface Definition
