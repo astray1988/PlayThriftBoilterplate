@@ -6,6 +6,8 @@
 GET     /                           controllers.Application.index
 GET     /comments                   controllers.Application.comments
 POST    /comments                   controllers.Application.comment(author, text)
+#Thrift service
+POST    /thrift                     controllers.ThriftController.thriftService
 
 
 # Map static resources from the /public folder to the /assets URL path
